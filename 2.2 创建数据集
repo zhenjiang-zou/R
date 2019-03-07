@@ -1,0 +1,48 @@
+2.2.5因子
+
+变量可归结为名义型、有序型或连续型变量。
+名义型变量是没有顺序之分的类别变量 名义型变量:Diabetes（Type1、Type2）
+
+有序型变量表示一种顺序关系，而非数量关系。
+病情Status（poor, improved, excellent）
+
+连续型变量可以呈现为某个范围内的任意值，并同时表示了顺序和数量。
+年龄Age(11,16,24,60)
+
+类别（名义型）变量和有序类别（有序型）变量在R中称为因子（factor）
+
+例1:
+diabetes<-c("Type1","Type2","Type1","Type1")
+status<-c("Poor","Improved","Excellent","Poor")
+status<-factor(status,order=TRUE,
+			   levels=c("Poor","Improved","Excellent"))
+			   
+			 
+例2:
+patientID<-c(1,2,3,4)			#以向量形式输入数据
+age<-c(25,34,28,52)
+diabetes<-c("Type1","Type2","Type1","Type1")
+status<-c("Poor","Improved","Excellent","Poor")
+diabetes<-factor(diabetes)
+status<-factor(status,order=TRUE)
+patientdata<-data.frame(patientID,age,diabetes,status)
+str(patientdata)		#显示对象结构
+summary(patientdata)			 	#显示统计概要
+
+
+
+2.2.6 列表
+使用函数list创建列表
+mylist<-list(object1,object2,....)
+mylist<-list(name1=object1,name2=object2,....)
+
+例1:
+g<-"My First List"
+h<-c(25,26,18,39)
+j<-matrix(1:10,nrow=5)
+k<-c("one","two","three")
+mylist<-list(title=g,ages=h,j,k)
+mylist
+mylist[[2]]
+mylist[["ages"]]
+
