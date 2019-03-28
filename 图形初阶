@@ -1,0 +1,84 @@
+
+3.1使用图形
+在通常的交互式会话中,通过逐条输入语句构建图形,逐渐完善图形特征,直至得到想要的效果.
+#油耗与车重的回归线
+attach(mtcars)
+plot(wt,mpg)
+abline(lm(mpg~wt))
+title("Regression of MPG on Weight")
+detach(mtcars)
+
+
+我们将以一个简单的图形作为本章的开始,接着进一步探索按需修改和强化图形的方式.然
+后,我们将着眼于一些更复杂的示例,以阐明其他的图形定制方法.我们关注的焦点是那些可以
+应用于多种R图形的技术.
+
+3.2图形构建举例
+
+让我们从表3-1中给出的假想数据集开始.它描述了病人对两种药物五个剂量水平上的响应
+情况.
+
+dose<-c(20,30,40,45,60)
+drugA<-c(16,20,27,40,60)
+drugB<-c(15,18,25,31,40)
+
+plot(dose,drugA,type="b")
+
+plot()是R中为对象作图的一个泛型函数（它的输出将根据所绘制对象类型的不同而变化）。
+本例中，plot(x, y, type="b")将x置于横轴，将y置于纵轴，绘制点集(x, y)，然后使用线段
+将其连接。选项type="b"表示同时绘制点和线。使用help(plot)可以查看其他选项。
+
+
+3.3 图形参数
+通过函数par()修改图形参数(字体,颜色,坐标轴,标题)
+
+例1
+opar<-par(no.readonly=TRUE)
+par(lty=2,pch=17)		#线条类型和符号类型
+plot(dose,drugA,type="b")
+par(opar)
+
+例2
+plot(dose,drugA,type="b",lty=2,pch=	17)
+plot(dose,drugA,type="b",lty=3,lwd=3,pch=15,cex=2)
+
+3.3.2 颜色
+n<-10
+mycolors<-rainbow(n)
+pie(rep(1,n),labels=mycolors,col=mycolors)
+mygrays<-gray(0:n/n)
+pie(rep(1,n),labels=mygrays,col=mygrays)
+
+3.3.3 文本属性
+par(font.lab=3,cex.lab=1.5,font.main=4,cex.main=2)
+
+windowsFonts(
+	A=windowsFont("Arial Black"),
+	B=windowsFont("Bookman Old Style"),
+	C=windowsFont("Comic Sans MS")
+)
+
+3.3.4 图形尺寸与边界尺寸
+
+par(pin=c(4,3),mai=c(1,.5,1,.2))
+dose<-c(20,30,40,45,60)
+drugA<-c(16,20,27,40,60)
+drugB<-c(15,18,25,31,40)
+opar<-par(no.readonly=TRUE)
+par(pin=c(2,3))
+par(lwd=2,cex=1.5)
+par(cex.axis=.75,font.axis=3)
+plot(dose,drugA,type="b",pch=19,lty=2,col="red")
+plot(dose,drugB,type="b",pch=23,lty=6,col="blue",bg="green")
+par(opar)
+
+
+library(scatterplot3d)
+attach(mtcars)
+scatterplot3d(wt,disp,mpg,
+				main="Basic 3D Scatter Plot")
+
+
+library(rgl)
+attach(mtcars)
+plot3d(wt,disp,mpg,col="red")
