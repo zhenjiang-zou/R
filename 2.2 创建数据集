@@ -46,3 +46,23 @@ mylist
 mylist[[2]]
 mylist[["ages"]]
 
+
+
+2.3 数据输入
+
+2.3.1 使用键盘输入数据
+
+mydata<-data.frame(age=numeric(0),gender=character(0),weight=numeric(0))
+mydata<-edit(mydata)
+fix(mydata)
+
+2.3.3 导入Excel 数据
+
+library(RODBC)
+channel<-odbcConnectExcel("myfile.xls")
+mydataframe<-sqlFetch(channel,"mysheet")
+odbcClose(channel)
+
+library(xlsx)
+workbook<-"c:/myworkbook.xlsx"
+mydataframe<-read.xlsx(workbook,1)
